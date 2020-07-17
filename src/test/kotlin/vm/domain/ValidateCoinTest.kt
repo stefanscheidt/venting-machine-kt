@@ -1,20 +1,20 @@
 package vm.domain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import io.kotlintest.shouldBe
+import io.kotlintest.specs.StringSpec
 
-class ValidateCoinTest {
+class ValidateCoinTest : StringSpec({
 
-    @Test
-    fun `validate valid coin`() {
-        assertThat(Nickel.coin.validate()).isEqualTo(Nickel)
-        assertThat(Dime.coin.validate()).isEqualTo(Dime)
-        assertThat(Quarter.coin.validate()).isEqualTo(Quarter)
+    "validate valid coin" {
+        Nickel.coin.validate().shouldBe(Nickel)
+        Dime.coin.validate().shouldBe(Dime)
+        Quarter.coin.validate().shouldBe(Quarter)
     }
 
-    @Test
-    fun `validate invalid coin`() {
-        val invalidCoin = Coin(Weight(1), Size(1), Size(1))
-        assertThat(invalidCoin.validate()).isEqualTo(RejectedCoin(invalidCoin))
+    "validate invalid coin" {
+        val invalidCoin = coinOf(weight = 1, diameter = 1, thickness = 1)
+
+        invalidCoin.validate().shouldBe(RejectedCoin(invalidCoin))
     }
-}
+
+})

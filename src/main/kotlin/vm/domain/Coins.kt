@@ -7,7 +7,7 @@ data class Weight(
     val value: Int
 ) {
     init {
-        validate(value).isGreaterOrEqual(0)
+        validate(value).isGreaterThan(0)
     }
 }
 
@@ -16,7 +16,7 @@ data class Size(
     val value: Int
 ) {
     init {
-        validate(value).isGreaterOrEqual(0)
+        validate(value).isGreaterThan(0)
     }
 }
 
@@ -25,3 +25,6 @@ data class Coin(
     val diameter: Size,
     val thickness: Size
 )
+
+fun coinOf(weight: Int, diameter: Int, thickness: Int): Coin =
+    Coin(Weight(weight), Size(diameter), Size(thickness))

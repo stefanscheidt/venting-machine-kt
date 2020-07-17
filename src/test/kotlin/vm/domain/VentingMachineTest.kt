@@ -1,18 +1,18 @@
 package vm.domain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import io.kotlintest.matchers.collections.shouldBeEmpty
+import io.kotlintest.shouldBe
+import io.kotlintest.specs.StringSpec
 
-class VentingMachineTest {
+class VentingMachineTest : StringSpec({
 
-    @Test
-    fun `empty machine`() {
+    "empty machine waits for coin" {
         val emptyMachine = VentingMachine()
 
-        assertThat(emptyMachine.coins).isEmpty()
-        assertThat(emptyMachine.coinReturn).isEmpty()
-        assertThat(emptyMachine.amount).isEqualTo(0)
-        assertThat(emptyMachine.display).isEqualTo("INSERT COIN")
+        emptyMachine.coins.shouldBeEmpty()
+        emptyMachine.coinReturn.shouldBeEmpty()
+        emptyMachine.amount.shouldBe(0)
+        emptyMachine.display.shouldBe("INSERT COIN")
     }
 
-}
+})

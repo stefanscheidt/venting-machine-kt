@@ -15,18 +15,13 @@ tasks.named<Test>("test") {
 
 dependencies {
     val junitVersion = "5.6.2"
-    val assertjVersion = "3.16.1"
 
     implementation(kotlin("stdlib-jdk8"))
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 
-    testImplementation("org.assertj:assertj-core:$assertjVersion")
-
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.3.2")
 }
 
 tasks {

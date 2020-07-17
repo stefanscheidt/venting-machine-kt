@@ -1,15 +1,15 @@
 package vm.domain
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Test
+import io.kotlintest.matchers.collections.shouldContainExactlyInAnyOrder
+import io.kotlintest.shouldBe
+import io.kotlintest.specs.StringSpec
 
 
-class AcceptCoinsTest {
+class AcceptCoinsTest : StringSpec({
 
-    val invalidCoin = Coin(Weight(1), Size(1), Size(1))
+    "accept coins" {
+        val invalidCoin = coinOf(weight = 1, diameter = 1, thickness = 1)
 
-    @Test
-    fun `accept coins`() {
         val ventingMachine = VentingMachine()
             .accept(Nickel.coin)
             .accept(invalidCoin)
@@ -18,17 +18,13 @@ class AcceptCoinsTest {
             .accept(invalidCoin)
             .accept(Dime.coin)
 
-        assertThat(ventingMachine.coins)
-            .containsExactlyInAnyOrder(Nickel, Dime, Dime, Quarter)
+        ventingMachine.coins.shouldContainExactlyInAnyOrder(Nickel, Dime, Dime, Quarter)
 
-        assertThat(ventingMachine.coinReturn)
-            .containsExactlyInAnyOrder(RejectedCoin(invalidCoin), RejectedCoin(invalidCoin))
+        ventingMachine.coinReturn.shouldContainExactlyInAnyOrder(RejectedCoin(invalidCoin), RejectedCoin(invalidCoin))
 
-        assertThat(ventingMachine.amount)
-            .isEqualTo(Nickel.value + 2 * Dime.value + Quarter.value)
+        ventingMachine.amount.shouldBe(Nickel.value + 2 * Dime.value + Quarter.value)
 
-        assertThat(ventingMachine.display)
-            .isEqualTo("${ventingMachine.amount} CENT")
+        ventingMachine.display.shouldBe("${ventingMachine.amount} CENT")
     }
 
-}
+})
