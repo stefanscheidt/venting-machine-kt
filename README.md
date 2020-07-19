@@ -3,6 +3,9 @@ Vending Machine Kata
 
 Venting Machine Kata in Kotlin, using ideas from functional domain modelling.
 
+Uses [Kotest](https://github.com/kotest/kotest).
+Install the [Kotest plugin](https://plugins.jetbrains.com/plugin/14080-kotest) to execute the test in IDEA.
+
 Original Kata Description
 =========================
 

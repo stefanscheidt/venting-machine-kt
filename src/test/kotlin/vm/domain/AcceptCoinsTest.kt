@@ -1,8 +1,8 @@
 package vm.domain
 
-import io.kotlintest.matchers.collections.shouldContainExactlyInAnyOrder
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldContainExactlyInAnyOrder
+import io.kotest.matchers.shouldBe
 
 
 class AcceptCoinsTest : StringSpec({
@@ -10,21 +10,16 @@ class AcceptCoinsTest : StringSpec({
     "accept coins" {
         val invalidCoin = coinOf(weight = 1, diameter = 1, thickness = 1)
 
-        val ventingMachine = VentingMachine()
-            .accept(Nickel.coin)
-            .accept(invalidCoin)
-            .accept(Dime.coin)
-            .accept(Quarter.coin)
-            .accept(invalidCoin)
-            .accept(Dime.coin)
+        val coins = listOf(Nickel.coin, invalidCoin, Dime.coin, Quarter.coin, invalidCoin, Dime.coin)
+        val ventingMachine = coins.fold(VentingMachine()) { machine, coin -> machine.accept(coin) }
 
         ventingMachine.coins.shouldContainExactlyInAnyOrder(Nickel, Dime, Dime, Quarter)
 
         ventingMachine.coinReturn.shouldContainExactlyInAnyOrder(RejectedCoin(invalidCoin), RejectedCoin(invalidCoin))
 
-        ventingMachine.amount.shouldBe(Nickel.value + 2 * Dime.value + Quarter.value)
+        ventingMachine.amount shouldBe (Nickel.value + Dime.value + Quarter.value + Dime.value)
 
-        ventingMachine.display.shouldBe("${ventingMachine.amount} CENT")
+        ventingMachine.display shouldBe "${ventingMachine.amount} CENT"
     }
 
 })

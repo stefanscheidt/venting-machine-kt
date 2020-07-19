@@ -1,8 +1,9 @@
 package vm.domain
 
-import io.kotlintest.matchers.collections.shouldBeEmpty
-import io.kotlintest.shouldBe
-import io.kotlintest.specs.StringSpec
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.collections.shouldBeEmpty
+import io.kotest.matchers.shouldBe
+
 
 class VentingMachineTest : StringSpec({
 
