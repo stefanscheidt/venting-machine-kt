@@ -12,8 +12,9 @@ class VentingMachineTest : StringSpec({
 
         emptyMachine.coins.shouldBeEmpty()
         emptyMachine.coinReturn.shouldBeEmpty()
-        emptyMachine.amount.shouldBe(0)
-        emptyMachine.display.shouldBe("INSERT COIN")
+        emptyMachine.amount shouldBe 0
+
+        emptyMachine.display.text shouldBe "INSERT COIN"
     }
 
 })
