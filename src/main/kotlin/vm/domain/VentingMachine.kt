@@ -10,13 +10,13 @@ data class VentingMachine(
     val display: Display = Display()
 ) {
     val amount: Int
-        get() = coins.sumBy { it.value }
+        get() = coins.sumOf(ValidCoin::value)
 }
 
 fun VentingMachine.insert(coin: Coin): VentingMachine =
-    when (val validatedCoin = coin.validate()) {
+    when (val validatedCoin = coin.validated()) {
         is ValidCoin -> copy(
-            coins = coins.plus(validatedCoin),
+            coins = coins + validatedCoin,
             display = Display(defaultText = (amount + validatedCoin.value).currencyString)
         )
         is RejectedCoin -> copy(

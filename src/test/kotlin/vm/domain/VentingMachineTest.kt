@@ -7,14 +7,13 @@ import io.kotest.matchers.shouldBe
 
 class VentingMachineTest : StringSpec({
 
-    "empty machine waits for coin" {
-        val emptyMachine = VentingMachine()
-
-        emptyMachine.coins.shouldBeEmpty()
-        emptyMachine.coinReturn.shouldBeEmpty()
-        emptyMachine.amount shouldBe 0
-
-        emptyMachine.display.text shouldBe "INSERT COIN"
+    "empty machine in empty and waits for coin" {
+        with(VentingMachine()) {
+            coins.shouldBeEmpty()
+            coinReturn.shouldBeEmpty()
+            amount shouldBe 0
+            display.text shouldBe "INSERT COIN"
+        }
     }
 
 })

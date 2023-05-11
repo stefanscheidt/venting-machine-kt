@@ -6,15 +6,15 @@ import io.kotest.matchers.shouldBe
 class ValidateCoinTest : StringSpec({
 
     "validate valid coin" {
-        Nickel.coin.validate() shouldBe Nickel
-        Dime.coin.validate() shouldBe Dime
-        Quarter.coin.validate() shouldBe Quarter
+        Nickel.coin.validated() shouldBe Nickel
+        Dime.coin.validated() shouldBe Dime
+        Quarter.coin.validated() shouldBe Quarter
     }
 
     "validate invalid coin" {
         val invalidCoin = coinOf(weight = 1, diameter = 1, thickness = 1)
 
-        invalidCoin.validate() shouldBe RejectedCoin(invalidCoin)
+        invalidCoin.validated() shouldBe RejectedCoin(invalidCoin)
     }
 
 })

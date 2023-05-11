@@ -25,7 +25,7 @@ data class RejectedCoin(val coin: Coin) : ValidatedCoin()
 fun Coin.matches(validCoin: ValidCoin): Boolean =
     this == validCoin.coin
 
-fun Coin.validate(): ValidatedCoin =
+fun Coin.validated(): ValidatedCoin =
     when {
         this.matches(Nickel) -> Nickel
         this.matches(Dime) -> Dime
